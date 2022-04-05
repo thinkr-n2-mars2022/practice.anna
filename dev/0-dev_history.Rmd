@@ -15,11 +15,12 @@ All commands that you use to use when developing packages...
 # Describe your package
 fusen::fill_description(
   pkg = here::here(),
+  overwrite = TRUE,
   fields = list(
     Title = "Practice package",
     Description = "This package includes a function that reads all excel files in a folder and merges them in one data frame",
     `Authors@R` = c(
-      person("Anna", "Mantsoki", email = "anna.mantsoki@finddx.org", role = c("aut", "cre"), comment = c(ORCID = "")),
+      person("Anna", "Mantsoki", email = "anna.mantsoki@finddx.org", role = c("aut", "cre"), comment = c(ORCID = "xx")),
       person(given = "FIND", role = "cph")
     )
   )
@@ -65,11 +66,15 @@ usethis::use_package_doc()
 usethis::use_github_action_check_standard()
 usethis::use_github_action("pkgdown")
 usethis::use_github_action("test-coverage")
-# _GitLab
-gitlabr::use_gitlab_ci(type = "check-coverage-pkgdown")
 
 # Add new flat template
-fusen::add_flat_template("add")
+#fusen::add_flat_template("add")
+
+#Add inst folder
+dir.create(here::here("inst"))
+
+#install package
+devtools::install(pkg = '.')
 ```
 
 ## Use everytime needed

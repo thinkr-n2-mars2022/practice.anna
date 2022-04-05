@@ -10,6 +10,25 @@ editor_options:
 
 ```{r development, include=FALSE}
 library(testthat)
+library(readxl)
+library(purrr)
+
+possi_excel <- possibly(read_excel, otherwise = NULL, quiet = TRUE)
+
+multi_read_excel <- function(folder = "data-raw/"){
+  
+  files <- list.files(folder, full.names = TRUE, pattern = '[.]xlsx$')
+  filenames <- list.files(folder, pattern = '[.]xlsx$')
+  data <- files %>%
+    map(possi_excel)
+  names(data) <- filenames
+
+  return(data)
+    
+}
+
+multi_read_excel(folder = "data-raw/")
+
 ```
 
 <!--
